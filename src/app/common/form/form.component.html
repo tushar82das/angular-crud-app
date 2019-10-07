@@ -1,0 +1,45 @@
+<form *ngIf="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.valid)">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name" formControlName="name">
+    <span class="error" *ngIf="(name.dirty || name.touched) && name.invalid && name.errors.required">
+      Name is required.
+    </span>
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" id="email" formControlName="email">
+    <span class="error" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.required">
+      Email is required.
+    </span>
+    <span class="error" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.email">
+      Value has to be a valid email address.
+    </span>
+  </div>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" class="form-control" id="password" formControlName="password">
+    <span class="error" class="error"
+      *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
+      Password is required.
+    </span>
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone:</label>
+    <input type="text" class="form-control" id="phone" formControlName="phone">
+    <span class="error" *ngIf="(phone.dirty || phone.touched) && phone.invalid && phone.errors.required">
+      Phone number is required.
+    </span>
+    <span class="error"
+      *ngIf="(phone.dirty || phone.touched) && phone.invalid && !phone.errors.required && phone.errors.invalidNumber">
+      Value has to be a number.
+    </span>
+  </div>
+  <div class="form-group">
+    <label for="address">Address:</label>
+    <input type="text" class="form-control" id="address" formControlName="address">
+  </div>
+  <button *ngIf="isUpdate" type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Update</button>&nbsp;
+  <button *ngIf="!isUpdate" type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Submit</button>&nbsp;
+  <button type="button" class="btn btn-secondary" (click)="revert()">Reset</button>
+</form>

@@ -1,0 +1,37 @@
+<ng-container *ngTemplateOutlet="dataGridTemplate; context:ctx">
+</ng-container>
+
+
+<ng-template #dataGridTemplate let-tblColoums="coloums" let-tblDatas="values">
+
+  <app-alert [visible]="isShowAlert" [type]="alertType" [msg]="alertMsg" (alertCloseEvent)="closeAlertBox()">
+  </app-alert>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th *ngFor="let col of tblColoums">{{col.header}}</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of tblDatas">
+        <td *ngFor="let col of tblColoums">{{data[col.field]}}</td>
+        <td>
+          <button type="button" class="btn btn-success" [routerLink]="['/user',data.id]">Update</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-secondary" (click)="deleteButton(data.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
+
+<p-dialog header="Confirm" [(visible)]="showDeleteConfirm" [modal]="true" [responsive]="true"
+  [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="false" [baseZIndex]="10000">
+  <p>Are you sure you want to delete this record?</p>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="confirmDeleteYes()" label="Yes"></button>
+    <button type="button" pButton icon="pi pi-close" (click)="showDeleteConfirm=false" label="No"
+      class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>

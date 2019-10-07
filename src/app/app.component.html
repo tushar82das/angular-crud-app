@@ -1,0 +1,11 @@
+<!-- Application Header -->
+<app-header [title]="title" (signInEvent)="headerLogInBtn($event)" (signOutEvent)="headerLogOutBtn($event)">
+</app-header>
+
+<!-- Application Main Container -->
+<main role="main" class="container" style="margin-top:80px">
+  <router-outlet></router-outlet>
+</main>
+
+<!-- APplication Footer -->
+<app-footer></app-footer>
